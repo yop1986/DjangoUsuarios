@@ -39,21 +39,52 @@ Comandos básicos
 
 Archivo _Settings_ del proyecto:
 
+    # Registro de librerias útilizadas (al inicio del archivo)
+    import os
+
+    # Registro de aplicaciones
+    INSTALLED_APPS = [
+        ...
+        'usuarios',
+    ]
+
+    # Configuración de directorios para plantillas
+    TEMPLATES = [
+        {
+            ...
+            'DIRS': [os.path.join(BASE_DIR, 'templates')],
+            'APP_DIRS': True,
+            ...
+        },
+    ]
+
+    # Configuración de base de datos
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
-            "NAME": "erp21_dev",
-            "USER": "erp_dev",
-            "PASSWORD": "dev21",
-            "HOST": "127.0.0.1",
-            "PORT": "3306",
+            "NAME": "<bbdd>",
+            "USER": "<usuario>",
+            "PASSWORD": "<contraseña>",
+            "HOST": "<ip | nombre>",
+            "PORT": "<puerto>",
         }
     }
 
+    # Configuración de regionalización
     LANGUAGE_CODE = 'es-gt'
     TIME_ZONE = 'UTC'
     USE_I18N = True
     USE_TZ = True
 
-    ###
+    # Configuración de archivos Static
+    STATICFILES_DIRS = (
+        ('static', '/home/djangoenv/bin/mysuperapp/static'),
+    )
+    
+    # Configuraciones adicionales
     AUTH_USER_MODEL = "usuarios.Usuario"
+
+Archivo _urls.py_ del proyecto:
+    
+    #Se registran las urls de esta app
+    path('usuarios/', include('usuarios.urls')),
