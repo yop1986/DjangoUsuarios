@@ -101,6 +101,7 @@ _Settings_: Configuraciones adicionales
             'nombre':       'Usuarios',
             'descripcion': 'Control de usuarios y permisos a las aplicaciones.',
             'enlace':       reverse_lazy('usuarios:index'),
+            'imagen':       'usuarios_logo.png',
         }
     }
     AUTH_USER_MODEL = "usuarios.Usuario"
