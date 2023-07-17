@@ -37,6 +37,12 @@ Creación y uso de un ambiente virtual
     (.venv) python manage.py showmigrations
     (.venv) python manage.py createsuperuser
 
+#### Clonar repositorio
+
+Se clona este repositorio, dentro del proyecto creado y en la carpeta 'usuarios', para hace uso de todas las funcionalidades
+
+    $ git clone https://github.com/yop1986/DjangoUsuarios.git usuarios 
+
 #### Configuración inicial
 
 _Settings_: Registro de librerias útilizadas (al inicio del archivo)
