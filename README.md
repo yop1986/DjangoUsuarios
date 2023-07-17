@@ -20,7 +20,7 @@ Creación y uso de un ambiente virtual
 
 ### Instalación y configuración Django
     
-Dependencias del proyecto
+#### Dependencias del proyecto
     
     asgiref==3.7.2
     Django==4.2.3
@@ -28,7 +28,7 @@ Dependencias del proyecto
     sqlparse==0.4.4
     tzdata==2023.3
 
-Comandos básicos
+#### Comandos básicos
 
     (.venv) django-admin startproject <nombre proyecto>
     (.venv) python manage.py startapp <nombre app>
@@ -37,18 +37,22 @@ Comandos básicos
     (.venv) python manage.py showmigrations
     (.venv) python manage.py createsuperuser
 
-Archivo _Settings_ del proyecto:
+#### Configuración inicial
 
-    # Registro de librerias útilizadas (al inicio del archivo)
+_Settings_: Registro de librerias útilizadas (al inicio del archivo)
+
     import os
+    from django.urls import reverse_lazy
 
-    # Registro de aplicaciones
+_Settings_: Registro de aplicaciones
+
     INSTALLED_APPS = [
         ...
         'usuarios',
     ]
 
-    # Configuración de directorios para plantillas
+_Settings_: Configuración de directorios para plantillas
+
     TEMPLATES = [
         {
             ...
@@ -58,7 +62,8 @@ Archivo _Settings_ del proyecto:
         },
     ]
 
-    # Configuración de base de datos
+_Settings_: Configuración de base de datos
+
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
@@ -70,21 +75,37 @@ Archivo _Settings_ del proyecto:
         }
     }
 
-    # Configuración de regionalización
+_Settings_: Configuración de regionalización
+
     LANGUAGE_CODE = 'es-gt'
     TIME_ZONE = 'UTC'
     USE_I18N = True
     USE_TZ = True
 
-    # Configuración de archivos Static
+_Settings_: Configuración de archivos Static
+
     STATICFILES_DIRS = (
-        ('static', '/home/djangoenv/bin/mysuperapp/static'),
+        ('static', os.path.join(BASE_DIR, 'static/')),
     )
-    
-    # Configuraciones adicionales
+_**Se debe crear la carpeta 'static' en el directorio raiz del proyecto o donde se haya definido en la configuración anterior.**_
+
+_Settings_: Configuraciones adicionales
+
+    CONFIGURACION = {
+        'sitio'     : "Nombre",
+        'disp_admin': "Nombre del administrador",
+        'mail_admin': "Correo",
+    }
+    APPS_DESC = {
+        'usuarios': { # Detalle para acceder al modulo instalado desde el 'home'
+            'nombre':       'Usuarios',
+            'descripcion': 'Control de usuarios y permisos a las aplicaciones.',
+            'enlace':       reverse_lazy('usuarios:index'),
+        }
+    }
     AUTH_USER_MODEL = "usuarios.Usuario"
 
-Archivo _urls.py_ del proyecto:
-    
-    #Se registran las urls de esta app
-    path('usuarios/', include('usuarios.urls')),
+
+_urls.py_: Registro de urls de aplicaciones instaladas
+
+    path('', include('usuarios.urls')),
